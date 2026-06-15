@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-rc-mgx^7c0p5$l2+w(xv-)5wtu*7bq=265u*vnsr8ek9xmz5ig
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "testserver"]
+# ALLOWED_HOSTS = ["127.0.0.1", "localhost", "testserver"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -129,6 +130,23 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
+
+
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 """
 Django settings for hostel_backend project.
@@ -162,7 +180,8 @@ SECRET_KEY = 'django-insecure-rc-mgx^7c0p5$l2+w(xv-)5wtu*7bq=265u*vnsr8ek9xmz5ig
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "testserver"]
+# ALLOWED_HOSTS = ["127.0.0.1", "localhost", "testserver"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -266,6 +285,13 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
+
+
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
+
 
 # Email settings
 import os
