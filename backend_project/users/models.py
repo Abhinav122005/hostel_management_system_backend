@@ -7,9 +7,13 @@ class User(models.Model):
     mobile = models.CharField(max_length=20, unique=True)
     password = models.CharField(max_length=255)
 
-    joined_hostel_id = models.CharField(max_length=64, blank=True, null=True)
-    joined_hostel_name = models.CharField(max_length=255, blank=True)
-    joined_owner_id = models.CharField(max_length=64, blank=True, null=True)
+    joined_hostel = models.ForeignKey(
+        'hostels_app.Hostel', 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True, 
+        related_name='active_users'
+    )
     joined_sharing_type = models.CharField(max_length=50, blank=True)
     joined_sharing_price = models.DecimalField(
         max_digits=10,
@@ -36,13 +40,13 @@ class User(models.Model):
         }
 
     def joined_hostel_dict(self):
-        if not self.joined_hostel_id and not self.joined_hostel_name:
+        if not self.joined_hostel:
             return None
 
         return {
-            "hostelId": self.joined_hostel_id,
-            "hostelName": self.joined_hostel_name,
-            "ownerId": self.joined_owner_id,
+            "hostelId": str(self.joined_hostel.id),
+            "hostelName": self.joined_hostel.name,
+            "ownerId": str(self.joined_hostel.owner_id),
             "sharingType": self.joined_sharing_type,
             "sharingPrice": str(self.joined_sharing_price)
             if self.joined_sharing_price is not None

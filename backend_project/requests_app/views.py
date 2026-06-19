@@ -106,18 +106,14 @@ def _set_user_joined_hostel(hostel_request):
     if sharing_price is None:
         sharing_price = (hostel.room_sharing or {}).get(hostel_request.sharing_type, 0)
 
-    user.joined_hostel_id = str(hostel.id)
-    user.joined_hostel_name = hostel.name
-    user.joined_owner_id = str(hostel.owner_id)
+    user.joined_hostel = hostel
     user.joined_sharing_type = hostel_request.sharing_type
     user.joined_sharing_price = sharing_price or 0
     from django.utils import timezone
     user.joined_date = timezone.now()
     user.save(
         update_fields=[
-            "joined_hostel_id",
-            "joined_hostel_name",
-            "joined_owner_id",
+            "joined_hostel",
             "joined_sharing_type",
             "joined_sharing_price",
             "joined_date",
@@ -128,17 +124,13 @@ def _set_user_joined_hostel(hostel_request):
 
 def _clear_user_joined_hostel(hostel_request):
     user = hostel_request.user
-    user.joined_hostel_id = None
-    user.joined_hostel_name = ""
-    user.joined_owner_id = None
+    user.joined_hostel = None
     user.joined_sharing_type = ""
     user.joined_sharing_price = None
     user.joined_date = None
     user.save(
         update_fields=[
-            "joined_hostel_id",
-            "joined_hostel_name",
-            "joined_owner_id",
+            "joined_hostel",
             "joined_sharing_type",
             "joined_sharing_price",
             "joined_date",
